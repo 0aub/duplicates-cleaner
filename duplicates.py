@@ -14,20 +14,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dir", help="directory path", type=str)
-parser.add_argument(
-    "-ho",
-    "--hash-only",
-    help="use only hash method (default: False)",
-    default=False,
-    action="store_true",
-)
-parser.add_argument(
-    "-s",
-    "--save",
-    help="save duplicated files names (default: False)",
-    default=False,
-    action="store_true",
-)
+parser.add_argument("-ho", "--hash-only", help="use only hash method (default: False)", default=False, action="store_true")
+parser.add_argument( "-s", "--save", help="save duplicated files names (default: False)", default=False, action="store_true")
 args = parser.parse_args()
 
 # =================================
