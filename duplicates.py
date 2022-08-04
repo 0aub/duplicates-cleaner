@@ -4,11 +4,9 @@
 
 import os
 import cv2
-from collections import defaultdict
 import hashlib
 from tqdm import tqdm
 import argparse
-import sys
 
 # =================================
 # =========== arguments ===========
@@ -36,11 +34,9 @@ args = parser.parse_args()
 # ========= calculations ==========
 # =================================
 
-
 def size(file_path):
     # get file size in KB
     return os.stat(file_path).st_size // 1024
-
 
 def duration(file_path):
     # capture the video
@@ -54,11 +50,9 @@ def duration(file_path):
     # return duration seconds
     return duration_seconds
 
-
 # =================================
 # ========== comparison ===========
 # =================================
-
 
 def compare_size(file_path1, file_path2):
     # compare if the two files have the same size in KB
@@ -69,16 +63,13 @@ def compare_duration(file_path1, file_path2):
     # compare if the two files have the same duration
     return duration(file_path1) == duration(file_path2)
 
-
 # =================================
 # ========== duplication ==========
 # =================================
 
-
 def extension(file_name):
     # get file extension
     return file_name.split(".")[-1].lower()
-
 
 def duplicates(path, hash_only=False):
     duplicate_list = []
@@ -125,11 +116,9 @@ def duplicates(path, hash_only=False):
     # return duplicates list
     return duplicate_list
 
-
 # =================================
 # =========== deletion ============
 # =================================
-
 
 def remove(duplicate_list):
     # loop over all duplicated videos and delete them
@@ -138,7 +127,6 @@ def remove(duplicate_list):
         if os.path.exists(file_path):
             # delete the target file
             os.remove(file_path)
-
 
 # =================================
 # ============= main ==============
@@ -156,13 +144,11 @@ if __name__ == "__main__":
                 with open("./duplicated files.txt", "+w") as file:
                     [file.write(file_name + "\n") for file_name in duplicate_list]
             # ask user to delete the duplicated files
-            input(
-                f"\n{len(duplicate_list)} duplicates were detected, press anything to delete them all"
-            )
+            input(f"\n{len(duplicate_list)} duplicates were detected, press anything to delete them all")
             # remove duplicates
             remove(duplicate_list)
         else:
             print("no duplicates were detected")
         print("DONE!")
     else:
-        print("please run the script properly. for more info: https://github.com/0aub/")
+        print("please run the script properly. for more info: https://github.com/0aub/duplicates-cleaner")
